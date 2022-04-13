@@ -10,12 +10,6 @@ from django.shortcuts import redirect
 from django.contrib.auth.forms import User
 
 
-# def eshop(request):
-#     products = Product.objects.all()
-#     context = {'products': products}
-#     return render(request, 'eshop.html', context)
-
-
 def my_store(request):
     if request.user.is_authenticated:
         order, created = Order.objects.get_or_create(user=request.user)
@@ -28,21 +22,6 @@ def my_store(request):
     return render(request, 'my_store.html', context)
 
 
-# def product(request):
-#     products = Product.objects.all()
-#     context = {'products': products}
-#     return render(request, 'product.html', context)
-
-
-# class OrderListView2(LoginRequiredMixin, ListView):
-#     model = Order
-#     context_object_name = 'orders'
-#     template_name = 'orders_list2.html'
-#     paginate_by = 10
-#
-#     def get_queryset(self):
-#         return Order.objects.filter(user=self.request.user).order_by('time')
-
 class EshopListView(LoginRequiredMixin, ListView):
     model = Product
     context_object_name = 'products'
@@ -53,7 +32,6 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
     context_object_name = 'product'
     template_name = 'product.html'
-
 
 
 @csrf_protect
